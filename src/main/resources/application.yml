@@ -1,6 +1,10 @@
 spring:
   application:
     name: firefox
+  banner:
+    charset: UTF-8
+    location: classpath:banner.txt
+    mode: console
 
 server:
   port: 8088
