@@ -13,8 +13,7 @@ WORKDIR /foxXist/resource
 ENV SERVER_PORT=8147 \
     LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
-    JAVA_OPTS="" \
-    NACOS_SERVER_ADDR=""
+    JAVA_OPTS=""
 
 EXPOSE ${SERVER_PORT}
 
