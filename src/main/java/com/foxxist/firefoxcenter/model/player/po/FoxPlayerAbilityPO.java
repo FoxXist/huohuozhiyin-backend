@@ -1,16 +1,13 @@
-package com.foxxist.firefoxcenter.model.user.po;
+package com.foxxist.firefoxcenter.model.player.po;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  * 球员能力值实体类
- *
- * @author foxxist
  */
 @Data
 @TableName("fox_player_ability")
@@ -18,6 +15,24 @@ public class FoxPlayerAbilityPO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
+
+    /**
+     * 附魔 (天赋)
+     */
+    @TableField("enchantment")
+    private String enchantment;
+
+    /**
+     * 进攻面板
+     */
+    @TableField("offensive_panel")
+    private String offensivePanel;
+
+    /**
+     * 防守面板
+     */
+    @TableField("defensive_panel")
+    private String defensivePanel;
 
     /**
      * 主键ID
@@ -74,34 +89,94 @@ public class FoxPlayerAbilityPO implements Serializable {
     private Integer passing;
 
     /**
-     * 扑救（1-100，仅门将）
+     * 逆足能力（1-100）
+     */
+    @TableField("weak_foot")
+    private Integer weakFoot;
+
+    /**
+     * 花式技巧（1-100）
+     */
+    @TableField("skill_moves")
+    private Integer skillMoves;
+
+    /**
+     * 五人制能力（1-100）
+     */
+    @TableField("futsal_rating")
+    private Integer futsalRating;
+
+    /**
+     * 11人制能力（1-100）
+     */
+    @TableField("football_rating")
+    private Integer footballRating;
+
+    /**
+     * 体能（1-100）
+     */
+    @TableField("stamina")
+    private Integer stamina;
+
+    /**
+     * 反应（1-100）
+     */
+    @TableField("reactions")
+    private Integer reactions;
+
+    /**
+     * 平衡（1-100）
+     */
+    @TableField("balance")
+    private Integer balance;
+
+    /**
+     * 弹跳（1-100）
+     */
+    @TableField("jumping")
+    private Integer jumping;
+
+    /**
+     * 头球（1-100）
+     */
+    @TableField("heading")
+    private Integer heading;
+
+    /**
+     * 门将特有属性：扑救（1-100）
      */
     @TableField("saving")
     private Integer saving;
 
     /**
-     * 手型（1-100，仅门将）
+     * 门将特有属性：手型（1-100）
      */
     @TableField("handling")
     private Integer handling;
 
     /**
-     * 开球（1-100，仅门将）
+     * 门将特有属性：开球（1-100）
      */
     @TableField("kicking")
     private Integer kicking;
 
     /**
-     * 反应（1-100，仅门将）
+     * 门将特有属性：站位（1-100）
      */
-    @TableField("reflexes")
-    private Integer reflexes;
+    @TableField("positioning")
+    private Integer positioning;
 
     /**
-     * 球员位置（GK：门将，DF：后卫，MF：中场，FW：前锋）
+     * 门将特有属性：反应（1-100）
      */
-    @TableField("position")
-    private String position;
+    @TableField("keeper_reactions")
+    private Integer keeperReactions;
+
+    /**
+     * 门将特有属性：速度（1-100）
+     */
+    @TableField("keeper_speed")
+    private Integer keeperSpeed;
 
     /**
      * 能力值更新时间
@@ -114,12 +189,6 @@ public class FoxPlayerAbilityPO implements Serializable {
      */
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
-
-    /**
-     * 更新时间
-     */
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime modifyTime;
 
     /**
      * 是否删除（0：未删除，1：已删除）

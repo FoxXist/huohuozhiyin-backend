@@ -1,6 +1,7 @@
 package com.foxxist.firefoxcenter.service.admin.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.foxxist.firefoxcenter.convert.admin.AdminConvertor;
 import com.foxxist.firefoxcenter.mapper.admin.FoxAdminMapper;
 import com.foxxist.firefoxcenter.model.admin.bo.FoxAdminBO;
 import com.foxxist.firefoxcenter.model.admin.po.FoxAdminPO;
@@ -45,7 +46,7 @@ public class FoxAdminServiceImpl implements FoxAdminService {
         response.setId(admin.getId());
         response.setUsername(admin.getUsername());
         response.setNickname(admin.getNickname());
-        response.setAvatar(admin.getAvatar());
+        response.setAvatar(AdminConvertor.getSignAvatar(admin.getAvatar(),600L));
         response.setRoleLevel(admin.getRoleLevel());
         response.setPermissions(JSON.parseArray(admin.getPermissions(), String.class));
 

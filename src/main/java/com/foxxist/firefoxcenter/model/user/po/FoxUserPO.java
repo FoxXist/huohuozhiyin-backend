@@ -86,6 +86,12 @@ public class FoxUserPO implements Serializable {
     private Integer status;
 
     /**
+     * 权限类型（0：访客用户，1：球员/俱乐部内部球员 2：使用用户(可参与正常功能)）
+     */
+    @TableField("competence")
+    private Integer competence;
+
+    /**
      * 最后登录时间
      */
     @TableField("last_login_time")

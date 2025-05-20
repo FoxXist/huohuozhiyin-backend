@@ -50,8 +50,8 @@ public class OssServiceImpl implements OssService {
             ossClient.putObject(putObjectRequest);
 
             // Step 4: 返回文件访问URL
-            return ossClient.generatePresignedUrl(bucketName, objectName, new Date(System.currentTimeMillis() + 3600 * 1000))
-                    .toString().split("\\?Expires")[0];
+            return objectName;
+
         } catch (IOException e) {
             log.error("文件上传失败", e);
             throw new RuntimeException("文件上传失败：" + e.getMessage());
