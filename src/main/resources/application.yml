@@ -39,3 +39,16 @@ server:
 wx:
   appid: ${WX_APP_ID:default-appid}
   secret: ${WX_SECRET:default-secret}
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+  default-produces-media-type: application/json
+  default-consumes-media-type: application/json
+# OpenAPI 元数据信息
+  info:
+    title: firefox
+    description: 狐火之茵足球俱乐部
+    version: 1.0.0
