@@ -28,8 +28,6 @@ public class OssServiceImpl implements OssService {
     @Value("${aliyun.oss.bucketName}")
     private String bucketName;
 
-    @Value("${aliyun.oss.domain}")
-    private String domain;
 
     @Override
     public String uploadFile(MultipartFile file, String dir) {
