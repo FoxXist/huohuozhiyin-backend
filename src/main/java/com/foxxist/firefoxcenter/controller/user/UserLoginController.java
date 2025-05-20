@@ -6,12 +6,10 @@ import com.foxxist.firefoxcenter.model.user.request.PasswordLoginRequest;
 import com.foxxist.firefoxcenter.model.user.request.RegisterRequest;
 import com.foxxist.firefoxcenter.model.user.request.WxLoginRequest;
 import com.foxxist.firefoxcenter.model.user.response.LoginResponse;
-import com.foxxist.firefoxcenter.service.OssService;
 import com.foxxist.firefoxcenter.service.user.UserLoginService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +24,6 @@ import java.util.Map;
 public class UserLoginController {
 
     private final UserLoginService userLoginService;
-    private final OssService ossService;
 
     /**
      * 处理微信登录请求的POST接口。
@@ -80,31 +77,5 @@ public class UserLoginController {
     public String logout() {
         // TODO: 实现退出登录逻辑
         return "退出登录成功";
-    }
-
-    /**
-     * 上传其他图片资源
-     */
-    @PostMapping("/upload/image")
-    public Result<String> uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("type") String type) {
-        try {
-            // 检查文件类型
-            String contentType = file.getContentType();
-            if (contentType == null || !contentType.startsWith("image/")) {
-                return Result.error("只能上传图片文件");
-            }
-
-            // 检查文件大小（限制为5MB）
-            if (file.getSize() > 5 * 1024 * 1024) {
-                return Result.error("图片大小不能超过5MB");
-            }
-
-            // 上传到OSS
-            String url = ossService.uploadFile(file, "images/" + type);
-            return Result.success(url);
-        } catch (Exception e) {
-            log.error("图片上传失败", e);
-            return Result.error("图片上传失败：" + e.getMessage());
-        }
     }
 } 
