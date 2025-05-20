@@ -47,8 +47,5 @@ springdoc:
     path: /swagger-ui.html
   default-produces-media-type: application/json
   default-consumes-media-type: application/json
-# OpenAPI 元数据信息
-  info:
-    title: firefox
-    description: 狐火之茵足球俱乐部
-    version: 1.0.0
+# OpenAPI 元数据信息 http://localhost:8147/v3/api-docs
+# 导出 http://localhost:8147/swagger-ui/index.html 接口文档

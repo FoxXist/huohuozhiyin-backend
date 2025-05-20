@@ -1,5 +1,6 @@
 package com.foxxist.firefoxcenter.model.admin.response;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import java.util.List;
 
@@ -7,10 +8,12 @@ import java.util.List;
  * 管理员登录响应对象
  */
 @Data
+@Schema(description = "管理员登录响应体")
 public class AdminLoginResponse {
     /**
      * 管理员ID
      */
+    @Schema(description = "管理员id")
     private Long id;
 
     /**
