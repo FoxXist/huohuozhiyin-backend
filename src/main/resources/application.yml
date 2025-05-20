@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: firefox
+  banner:
+    charset: UTF-8
+    location: classpath:banner.txt
+    mode: console
+  datasource:
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:foxxist123456}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL:jdbc:mysql://localhost:3307/firefox-club?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=Asia/Shanghai}
+    minimum-idle: 5
+    maximum-pool-size: 20
+    idle-timeout: 600000
+    max-lifetime: 1800000
+    connection-timeout: 30000
+    pool-name: UserHikariCP
+    auto-commit: true
+    connection-test-query: SELECT 1 FROM DUAL
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.foxxist.firefoxcenter
+  global-config:
+    db-config:
+      id-type: auto
+
+aliyun:
+  oss:
+    endpoint: ${OSS_ENDPOINT:oss-cn-hangzhou.aliyuncs.com}
+    accessKeyId: ${OSS_ACCESS_KEY_ID:default-key}
+    accessKeySecret: ${OSS_ACCESS_KEY_SECRET:default-secret}
+    bucketName: ${OSS_BUCKET_NAME:foxxist-firefox}
+
+server:
+  port: ${SERVER_PORT:8147}
+
+wx:
+  appid: ${WX_APP_ID:default-appid}
+  secret: ${WX_SECRET:default-secret}
