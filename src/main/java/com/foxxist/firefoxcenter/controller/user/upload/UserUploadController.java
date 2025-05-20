@@ -45,7 +45,7 @@ public class UserUploadController {
             }
 
             // Step 3: 上传到OSS
-            String url = ossService.uploadFile(file, "avatar");
+            String url = ossService.uploadFile(file, "user/avatar");
             return Result.success(url);
         } catch (Exception e) {
             log.error("头像上传失败", e);

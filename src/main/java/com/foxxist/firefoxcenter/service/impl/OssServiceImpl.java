@@ -57,4 +57,21 @@ public class OssServiceImpl implements OssService {
             throw new RuntimeException("文件上传失败：" + e.getMessage());
         }
     }
+
+    @Override
+    public String getFullUrl(String fileName, Long expire) {
+        if (fileName == null || fileName.isEmpty()) {
+            throw new RuntimeException("文件名不能为空");
+        }
+
+        try {
+            return ossClient.generatePresignedUrl(bucketName, fileName, new Date(System.currentTimeMillis() + expire * 1000))
+                    .toString();
+        }
+        catch (Exception e) {
+            log.error("获取文件URL失败", e);
+            throw new RuntimeException("获取文件URL失败：" + e.getMessage());
+        }
+
+    }
 } 

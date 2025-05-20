@@ -14,4 +14,6 @@ public interface OssService {
      * @return 文件访问URL
      */
     String uploadFile(MultipartFile file, String dir);
+
+    String getFullUrl(String fileName, Long expire);
 } 
