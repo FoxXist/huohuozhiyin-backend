@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * 微信小程序用户视图对象
@@ -70,4 +71,9 @@ public class FoxUserVO implements Serializable {
      * 用户类型
      */
     private String userTypeName;
+
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createTime;
 } 

@@ -3,10 +3,9 @@ package com.foxxist.firefoxcenter.controller.admin;
 import com.foxxist.firefoxcenter.model.admin.request.AdminLoginRequest;
 import com.foxxist.firefoxcenter.model.admin.response.AdminLoginResponse;
 import com.foxxist.firefoxcenter.model.common.Result;
-import com.foxxist.firefoxcenter.service.admin.FoxAdminService;
+import com.foxxist.firefoxcenter.service.admin.AdminLoginService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AdminLoginController {
 
-    private final FoxAdminService adminService;
+    private final AdminLoginService adminService;
 
     /**
      * 管理员登录

@@ -1,4 +1,4 @@
-package com.foxxist.firefoxcenter.mapper;
+package com.foxxist.firefoxcenter.mapper.club;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.foxxist.firefoxcenter.model.club.po.FoxClubPO;

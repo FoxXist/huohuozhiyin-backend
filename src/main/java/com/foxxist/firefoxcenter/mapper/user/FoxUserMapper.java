@@ -1,4 +1,4 @@
-package com.foxxist.firefoxcenter.mapper;
+package com.foxxist.firefoxcenter.mapper.user;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.foxxist.firefoxcenter.model.user.po.FoxUserPO;

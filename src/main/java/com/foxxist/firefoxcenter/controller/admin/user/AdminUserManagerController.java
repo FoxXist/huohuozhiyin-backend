@@ -2,14 +2,13 @@ package com.foxxist.firefoxcenter.controller.admin.user;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.foxxist.firefoxcenter.model.common.Result;
+import com.foxxist.firefoxcenter.model.user.request.UserDetailRequest;
 import com.foxxist.firefoxcenter.model.user.request.UserListRequest;
+import com.foxxist.firefoxcenter.model.user.vo.FoxUserDetailVO;
 import com.foxxist.firefoxcenter.model.user.vo.FoxUserVO;
-import com.foxxist.firefoxcenter.service.user.UserManagerService;
+import com.foxxist.firefoxcenter.service.admin.AdminUserManagerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 管理员后台用户管理控制器
@@ -23,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AdminUserManagerController {
 
-    private final UserManagerService userManagerService;
+    private final AdminUserManagerService adminUserManagerService;
 
     /**
      * 分页查询用户列表
@@ -33,12 +32,18 @@ public class AdminUserManagerController {
      */
     @PostMapping("/list")
     public Result<Page<FoxUserVO>> getUserList(@RequestBody UserListRequest request) {
-        return Result.success(userManagerService.getUserList(
-            request.getCurrent(),
-            request.getSize(),
-            request.getNickname(),
-            request.getPhone(),
-            request.getStatus()
-        ));
+        return Result.success(adminUserManagerService.getUserList(request));
+    }
+
+    /**
+     * 查询用户详情
+     * 根据请求参数返回用户详细信息，可选择性包含球员信息、俱乐部信息和统计数据
+     *
+     * @param request 查询请求参数
+     * @return 用户详情信息
+     */
+    @PostMapping("/detail")
+    public Result<FoxUserDetailVO> getUserDetail(@RequestBody UserDetailRequest request) {
+        return Result.success(adminUserManagerService.getUserDetail(request));
     }
 }

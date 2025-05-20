@@ -7,7 +7,7 @@ import com.foxxist.firefoxcenter.model.admin.response.AdminLoginResponse;
 /**
  * 管理员Service接口
  */
-public interface FoxAdminService {
+public interface AdminLoginService {
     /**
      * 管理员登录
      *

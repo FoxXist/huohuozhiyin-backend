@@ -1,7 +1,7 @@
 package com.foxxist.firefoxcenter.service.club.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.foxxist.firefoxcenter.mapper.FoxClubMapper;
+import com.foxxist.firefoxcenter.mapper.club.FoxClubMapper;
 import com.foxxist.firefoxcenter.model.club.bo.FoxClubBO;
 import com.foxxist.firefoxcenter.model.club.po.FoxClubPO;
 import com.foxxist.firefoxcenter.model.club.vo.FoxClubVO;

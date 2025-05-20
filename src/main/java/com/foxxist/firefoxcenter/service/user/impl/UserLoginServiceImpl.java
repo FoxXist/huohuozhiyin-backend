@@ -1,7 +1,7 @@
 package com.foxxist.firefoxcenter.service.user.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.foxxist.firefoxcenter.mapper.FoxUserMapper;
+import com.foxxist.firefoxcenter.mapper.user.FoxUserMapper;
 import com.foxxist.firefoxcenter.model.user.bo.FoxUserBO;
 import com.foxxist.firefoxcenter.model.user.po.FoxUserPO;
 import com.foxxist.firefoxcenter.model.user.request.WxLoginRequest;

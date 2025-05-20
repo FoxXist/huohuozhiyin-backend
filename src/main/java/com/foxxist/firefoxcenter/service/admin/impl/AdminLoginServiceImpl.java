@@ -7,18 +7,17 @@ import com.foxxist.firefoxcenter.model.admin.bo.FoxAdminBO;
 import com.foxxist.firefoxcenter.model.admin.po.FoxAdminPO;
 import com.foxxist.firefoxcenter.model.admin.request.AdminLoginRequest;
 import com.foxxist.firefoxcenter.model.admin.response.AdminLoginResponse;
-import com.foxxist.firefoxcenter.service.admin.FoxAdminService;
+import com.foxxist.firefoxcenter.service.admin.AdminLoginService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
-import java.util.List;
 
 /**
  * 管理员Service实现类
  */
 @Service
-public class FoxAdminServiceImpl implements FoxAdminService {
+public class AdminLoginServiceImpl implements AdminLoginService {
 
     @Autowired
     private FoxAdminMapper adminMapper;
