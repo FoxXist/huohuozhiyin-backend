@@ -1,6 +1,8 @@
 package com.foxxist.firefoxcenter.model.user.vo;
 
 import lombok.Data;
+
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -11,6 +13,7 @@ import java.io.Serializable;
 @Data
 public class FoxUserVO implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -57,4 +60,14 @@ public class FoxUserVO implements Serializable {
      * 用户状态
      */
     private Boolean status;
+
+    /**
+     * 状态名称
+     */
+    private String statusName;
+
+    /**
+     * 用户类型
+     */
+    private String userTypeName;
 } 
