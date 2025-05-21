@@ -7,6 +7,8 @@ import com.foxxist.firefoxcenter.model.user.request.UserListRequest;
 import com.foxxist.firefoxcenter.model.user.vo.FoxUserDetailVO;
 import com.foxxist.firefoxcenter.model.user.vo.FoxUserVO;
 import com.foxxist.firefoxcenter.service.admin.AdminUserManagerService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/admin/user")
 @RequiredArgsConstructor
+@Tag(name = "管理员用户管理控制器", description = "用户管理列表界面")
 public class AdminUserManagerController {
 
     private final AdminUserManagerService adminUserManagerService;
@@ -31,6 +34,7 @@ public class AdminUserManagerController {
      * @return 用户列表分页数据
      */
     @PostMapping("/list")
+    @Operation(summary = "查询用户列表")
     public Result<Page<FoxUserVO>> getUserList(@RequestBody UserListRequest request) {
         return Result.success(adminUserManagerService.getUserList(request));
     }
@@ -43,6 +47,7 @@ public class AdminUserManagerController {
      * @return 用户详情信息
      */
     @PostMapping("/detail")
+    @Operation(summary = "查询用户详情")
     public Result<FoxUserDetailVO> getUserDetail(@RequestBody UserDetailRequest request) {
         return Result.success(adminUserManagerService.getUserDetail(request));
     }

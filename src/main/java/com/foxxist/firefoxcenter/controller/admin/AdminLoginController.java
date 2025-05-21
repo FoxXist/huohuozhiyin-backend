@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/admin")
 @RequiredArgsConstructor
-@Tag(name = "管理员登录控制器", description = "登录、注册等")
+@Tag(name = "管理员登录控制器", description = "登录")
 public class AdminLoginController {
 
     private final AdminLoginService adminService;

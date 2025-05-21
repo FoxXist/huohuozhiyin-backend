@@ -8,6 +8,8 @@ import com.foxxist.firefoxcenter.model.admin.po.FoxAdminPO;
 import com.foxxist.firefoxcenter.model.admin.request.AdminLoginRequest;
 import com.foxxist.firefoxcenter.model.admin.response.AdminLoginResponse;
 import com.foxxist.firefoxcenter.service.admin.AdminLoginService;
+import com.foxxist.firefoxcenter.util.PasswordUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,10 +19,11 @@ import com.alibaba.fastjson.JSON;
  * 管理员Service实现类
  */
 @Service
+@RequiredArgsConstructor
 public class AdminLoginServiceImpl implements AdminLoginService {
 
-    @Autowired
-    private FoxAdminMapper adminMapper;
+
+    private final FoxAdminMapper adminMapper;
 
     @Override
     public AdminLoginResponse login(AdminLoginRequest request) {
@@ -36,7 +39,7 @@ public class AdminLoginServiceImpl implements AdminLoginService {
         }
 
         // TODO: 2. 验证密码（需要实现密码加密和验证逻辑）
-        if (!admin.getPassword().equals(request.getPassword())) {
+        if (!PasswordUtil.matches(request.getPassword(),admin.getPassword())) {
             throw new RuntimeException("密码错误");
         }
 
@@ -45,10 +48,8 @@ public class AdminLoginServiceImpl implements AdminLoginService {
         response.setId(admin.getId());
         response.setUsername(admin.getUsername());
         response.setNickname(admin.getNickname());
-        response.setAvatar(AdminConvertor.getSignAvatar(admin.getAvatar(),600L));
+        response.setAvatarUrl(admin.getAvatar());
         response.setRoleLevel(admin.getRoleLevel());
-        response.setPermissions(JSON.parseArray(admin.getPermissions(), String.class));
-
         // TODO: 4. 生成登录token（需要实现token生成逻辑）
         response.setToken("temp_token");
 

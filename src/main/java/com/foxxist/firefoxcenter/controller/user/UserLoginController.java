@@ -7,6 +7,8 @@ import com.foxxist.firefoxcenter.model.user.request.RegisterRequest;
 import com.foxxist.firefoxcenter.model.user.request.WxLoginRequest;
 import com.foxxist.firefoxcenter.model.user.response.LoginResponse;
 import com.foxxist.firefoxcenter.service.user.UserLoginService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
+@Tag(name = "用户登陆控制器", description = "微信端 和后台react无关")
 public class UserLoginController {
 
     private final UserLoginService userLoginService;
@@ -33,6 +36,7 @@ public class UserLoginController {
      * @return 返回包含登录结果的Result对象
      */
     @PostMapping("/login/wx")
+    @Operation(summary = "微信登陆控制器")
     public Result<LoginResponse> wxLogin(@RequestBody WxLoginRequest request) {
         try {
             LoginResponse response = userLoginService.loginOrRegisterByWx(request);
@@ -47,6 +51,7 @@ public class UserLoginController {
      * 密码登录
      */
     @PostMapping("/login/password")
+    @Operation(summary = "微信普通账密登陆")
     public String passwordLogin(@RequestBody PasswordLoginRequest request) {
         // TODO: 实现密码登录逻辑
         return "密码登录成功";

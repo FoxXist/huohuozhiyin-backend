@@ -1,23 +1,32 @@
 package com.foxxist.firefoxcenter.model.admin.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * 管理员登录请求对象
  */
 @Data
-@Schema(description = "管理员登录请求体")
-public class AdminLoginRequest {
+@Schema(description = "管理员登录请求")
+public class AdminLoginRequest implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     /**
-     * 管理员账号
+     * 用户名
      */
-    @Schema(description = "账号", example = "admin123")
+    @NotBlank(message = "用户名不能为空")
+    @Schema(description = "用户名", required = true)
     private String username;
 
     /**
-     * 管理员密码
+     * 密码
      */
-    @Schema(description = "密码", example = "password")
+    @NotBlank(message = "密码不能为空")
+    @Schema(description = "密码", required = true)
     private String password;
 } 

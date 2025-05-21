@@ -1,6 +1,9 @@
 package com.foxxist.firefoxcenter.model.admin.bo;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,13 +14,16 @@ import java.util.List;
  * @author foxxist
  */
 @Data
+@Schema(description = "管理员业务载体")
 public class FoxAdminBO implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
      * 管理员ID
      */
+    @Schema(description = "管理员id", example = "记得存起来")
     private Long id;
 
     /**
@@ -33,6 +39,7 @@ public class FoxAdminBO implements Serializable {
     /**
      * 管理员头像
      */
+    @Schema(description = "管理员头像", example = "")
     private String avatar;
 
     /**
