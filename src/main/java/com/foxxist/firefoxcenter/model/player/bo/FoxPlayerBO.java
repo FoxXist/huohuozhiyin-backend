@@ -82,6 +82,11 @@ public class FoxPlayerBO implements Serializable {
     private String club;
 
     /**
+     * 效力俱乐部ID
+     */
+    private Long clubId;
+
+    /**
      * 身价(欧元)
      */
     private BigDecimal marketValue;

@@ -13,6 +13,7 @@ CREATE TABLE `fox_player` (
     `specific_position` VARCHAR(20) DEFAULT NULL COMMENT '具体擅长位置（如：中锋、边锋、后腰等）',
     `jersey_number` VARCHAR(10) DEFAULT NULL COMMENT '球衣号码',
     `club` VARCHAR(100) DEFAULT NULL COMMENT '效力俱乐部',
+    `club_id` int(0) NULL DEFAULT NULL COMMENT '效力俱乐部id 如果为null 为外部球员',
     `market_value` DECIMAL(12,2) DEFAULT NULL COMMENT '身价(欧元)',
     `region` VARCHAR(50) DEFAULT NULL COMMENT '地区',
     `city` VARCHAR(50) DEFAULT NULL COMMENT '城市',

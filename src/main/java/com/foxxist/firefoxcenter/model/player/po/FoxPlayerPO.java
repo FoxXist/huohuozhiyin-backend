@@ -97,6 +97,12 @@ public class FoxPlayerPO implements Serializable {
     private String club;
 
     /**
+     * 效力俱乐部id
+     */
+    @TableField("club_id")
+    private String clubId;
+
+    /**
      * 身价(欧元)
      */
     @TableField("market_value")
