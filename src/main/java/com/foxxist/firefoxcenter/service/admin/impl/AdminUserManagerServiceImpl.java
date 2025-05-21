@@ -3,9 +3,12 @@ package com.foxxist.firefoxcenter.service.admin.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.foxxist.firefoxcenter.mapper.club.FoxClubMapper;
+import com.foxxist.firefoxcenter.mapper.player.FoxPlayerAbilityMapper;
 import com.foxxist.firefoxcenter.mapper.player.FoxPlayerMapper;
 import com.foxxist.firefoxcenter.mapper.user.FoxUserMapper;
+import com.foxxist.firefoxcenter.model.player.po.FoxPlayerAbilityPO;
 import com.foxxist.firefoxcenter.model.player.po.FoxPlayerPO;
+import com.foxxist.firefoxcenter.model.player.vo.FoxPlayerAbilityVO;
 import com.foxxist.firefoxcenter.model.player.vo.FoxPlayerVO;
 import com.foxxist.firefoxcenter.model.user.po.FoxUserPO;
 import com.foxxist.firefoxcenter.model.user.request.UserDetailRequest;
@@ -30,6 +33,7 @@ public class AdminUserManagerServiceImpl implements AdminUserManagerService {
 
     private final FoxUserMapper foxUserMapper;
     private final FoxPlayerMapper foxPlayerMapper;
+    private final FoxPlayerAbilityMapper foxPlayerAbilityMapper;
     private final FoxClubMapper foxClubMapper;
 
     @Override
@@ -94,12 +98,26 @@ public class AdminUserManagerServiceImpl implements AdminUserManagerService {
             if (playerPO != null) {
                 FoxPlayerVO playerVO = new FoxPlayerVO();
                 BeanUtils.copyProperties(playerPO, playerVO);
-                userDetailVO.setPlayerInfo(playerVO);
+                
+                // 设置状态名称
+                playerVO.setStatusName(getPlayerStatusName(playerPO.getStatus()));
+                
+                // 设置惯用脚名称
+                playerVO.setPreferredFootName(getPreferredFootName(playerPO.getPreferredFoot()));
 
-                // 如果需要包含俱乐部信息
-                if (Boolean.TRUE.equals(request.getIncludeClubInfo())) {
-                    // TODO: 查询并设置俱乐部信息
+                // 查询球员能力值信息
+                FoxPlayerAbilityPO abilityPO = foxPlayerAbilityMapper.selectOne(
+                    new LambdaQueryWrapper<FoxPlayerAbilityPO>()
+                        .eq(FoxPlayerAbilityPO::getPlayerId, playerPO.getId())
+                );
+
+                if (abilityPO != null) {
+                    FoxPlayerAbilityVO abilityVO = new FoxPlayerAbilityVO();
+                    BeanUtils.copyProperties(abilityPO, abilityVO);
+                    playerVO.setAbility(abilityVO);
                 }
+
+                userDetailVO.setPlayerInfo(playerVO);
             }
         }
 
@@ -177,6 +195,39 @@ public class AdminUserManagerServiceImpl implements AdminUserManagerService {
         return switch (competence) {
             case 0 -> "普通用户";
             case 1 -> "管理员";
+            default -> "未知";
+        };
+    }
+
+    /**
+     * 获取球员状态名称
+     */
+    private String getPlayerStatusName(Integer status) {
+        if (status == null) {
+            return "未知";
+        }
+        return switch (status) {
+            case 0 -> "未激活";
+            case 1 -> "正常";
+            case 2 -> "受伤";
+            case 3 -> "停赛";
+            case 4 -> "歇着";
+            case 5 -> "已堕落";
+            default -> "未知";
+        };
+    }
+
+    /**
+     * 获取惯用脚名称
+     */
+    private String getPreferredFootName(Integer preferredFoot) {
+        if (preferredFoot == null) {
+            return "未知";
+        }
+        return switch (preferredFoot) {
+            case 1 -> "左脚";
+            case 2 -> "右脚";
+            case 3 -> "双脚";
             default -> "未知";
         };
     }
