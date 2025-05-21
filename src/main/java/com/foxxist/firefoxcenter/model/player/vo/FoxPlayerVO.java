@@ -1,5 +1,6 @@
 package com.foxxist.firefoxcenter.model.player.vo;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serial;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
  * @since 2025/5/20 16:07
  */
 @Data
+@Schema(description = "俱乐部球员响应实体", example = "")
 public class FoxPlayerVO implements Serializable {
 
     @Serial
