@@ -2,6 +2,8 @@ package com.foxxist.firefoxcenter.controller.admin.upload;
 
 import com.foxxist.firefoxcenter.model.common.Result;
 import com.foxxist.firefoxcenter.service.OssService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/admin")
 @RequiredArgsConstructor
+@Tag(name = "管理员资源上传", description = "上传头像图片 主页图片 等等")
 public class AdminUploadController {
 
     private final OssService ossService;
@@ -35,6 +38,7 @@ public class AdminUploadController {
      * @return 返回上传结果，包括成功或失败的信息
      */
     @PostMapping("/upload/avatar")
+    @Operation(summary = "管理员上传个人头像或更新个人头像",description = "内部上传到阿里云对象存储OSS")
     public Result<String> uploadAvatar(@RequestParam("file") MultipartFile file) {
         try {
             // Step 1: 检查管理员上传文件类型
