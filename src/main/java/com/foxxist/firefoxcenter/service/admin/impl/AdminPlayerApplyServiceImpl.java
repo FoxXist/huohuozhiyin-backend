@@ -5,13 +5,16 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.foxxist.firefoxcenter.mapper.apply.FoxPlayerApplyMapper;
 import com.foxxist.firefoxcenter.model.player.po.FoxPlayerApplyPO;
 import com.foxxist.firefoxcenter.model.player.request.PlayerApplyListRequest;
+import com.foxxist.firefoxcenter.model.player.request.PlayerApplyStatusRequest;
 import com.foxxist.firefoxcenter.model.player.vo.FoxPlayerApplyVO;
 import com.foxxist.firefoxcenter.service.admin.AdminPlayerApplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,6 +58,32 @@ public class AdminPlayerApplyServiceImpl implements AdminPlayerApplyService {
         voPage.setRecords(voList);
 
         return voPage;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean updateApplyStatus(PlayerApplyStatusRequest request) {
+        // Step 1: 查询申请记录
+        FoxPlayerApplyPO apply = foxPlayerApplyMapper.selectById(request.getId());
+        if (apply == null) {
+            return false;
+        }
+
+        // Step 2: 检查申请状态是否为待审核
+        if (apply.getStatus() != 0) {
+            return false;
+        }
+
+        // Step 3: 更新申请状态
+        FoxPlayerApplyPO updateApply = new FoxPlayerApplyPO();
+        updateApply.setId(request.getId());
+        updateApply.setStatus(request.getStatus());
+        updateApply.setReviewRemark(request.getReviewRemark());
+        updateApply.setReviewTime(LocalDateTime.now());
+        // TODO: 设置审核人ID，需要从当前登录用户中获取
+        // updateApply.setReviewerId(getCurrentUserId());
+
+        return foxPlayerApplyMapper.updateById(updateApply) > 0;
     }
 
     /**

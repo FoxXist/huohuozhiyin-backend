@@ -3,6 +3,7 @@ package com.foxxist.firefoxcenter.controller.admin.apply;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.foxxist.firefoxcenter.common.Result;
 import com.foxxist.firefoxcenter.model.player.request.PlayerApplyListRequest;
+import com.foxxist.firefoxcenter.model.player.request.PlayerApplyStatusRequest;
 import com.foxxist.firefoxcenter.model.player.vo.FoxPlayerApplyVO;
 import com.foxxist.firefoxcenter.service.admin.AdminPlayerApplyService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,5 +37,11 @@ public class ApplyManagerController {
     @Operation(summary = "查询入队申请列表", description = "分页查询入队申请列表，支持多条件筛选")
     public Result<Page<FoxPlayerApplyVO>> getApplyList(@RequestBody PlayerApplyListRequest request) {
         return Result.success(adminPlayerApplyService.getApplyList(request));
+    }
+
+    @PostMapping("/apply/status")
+    @Operation(summary = "更新入队申请状态", description = "更新入队申请状态（通过/拒绝）")
+    public Result<Boolean> updateApplyStatus(@RequestBody PlayerApplyStatusRequest request) {
+        return Result.success(adminPlayerApplyService.updateApplyStatus(request));
     }
 }
