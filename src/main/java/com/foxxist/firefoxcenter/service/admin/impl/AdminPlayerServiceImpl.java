@@ -26,7 +26,8 @@ public class AdminPlayerServiceImpl implements AdminPlayerService {
 
     @Override
     public Page<FoxPlayerVO> getPlayerList(PlayerListRequest request) {
-        // 1. 构建查询条件
+
+        // Step 1: 构建查询条件
         LambdaQueryWrapper<FoxPlayerPO> wrapper = new LambdaQueryWrapper<FoxPlayerPO>()
             .like(StringUtils.isNotBlank(request.getName()), FoxPlayerPO::getName, request.getName())
             .like(StringUtils.isNotBlank(request.getNumber()), FoxPlayerPO::getJerseyNumber, request.getNumber())
@@ -34,18 +35,18 @@ public class AdminPlayerServiceImpl implements AdminPlayerService {
             .eq(request.getStatus() != null, FoxPlayerPO::getStatus, request.getStatus())
             .orderByDesc(FoxPlayerPO::getCreateTime);
 
-        // 2. 执行分页查询
+        // Step 2: 执行分页查询
         Page<FoxPlayerPO> page = playerMapper.selectPage(
             new Page<>(request.getCurrent(), request.getSize()),
             wrapper
         );
 
-        // 3. 转换为VO对象
+        // Step 3: 转换为VO对象
         List<FoxPlayerVO> records = page.getRecords().stream()
             .map(this::convertToVO)
             .collect(Collectors.toList());
 
-        // 4. 构建返回结果
+        // Step 4: 构建返回结果
         Page<FoxPlayerVO> result = new Page<>();
         BeanUtils.copyProperties(page, result, "records");
         result.setRecords(records);

@@ -2,6 +2,8 @@ package com.foxxist.firefoxcenter.controller.user.upload;
 
 import com.foxxist.firefoxcenter.model.common.Result;
 import com.foxxist.firefoxcenter.service.OssService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
+@Tag(name = "用户资源上传控制器", description = "上传用户头像 主页信息")
 public class UserUploadController {
 
     private final OssService ossService;
@@ -31,6 +34,7 @@ public class UserUploadController {
      * 上传用户头像
      */
     @PostMapping("/upload/avatar")
+    @Operation(summary = "用户头像上传")
     public Result<String> uploadAvatar(@RequestParam("file") MultipartFile file) {
         try {
             // Step 1: 检查文件类型
